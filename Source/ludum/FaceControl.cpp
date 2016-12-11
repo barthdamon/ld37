@@ -28,9 +28,15 @@ void UFaceControl::BeginPlay()
 
 }
 
+void UFaceControl::RotateSubroomsForInput(int input) 
+{
+	// 
+}
+
 void UFaceControl::OnTimer() 
 {
 	UE_LOG(LogTemp, Log, TEXT("Timer Run"));
+	RotateSubroomsForInput(1);
 }
 
 

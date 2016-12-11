@@ -23,7 +23,10 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+	void RotateSubroomsForInput(int input);
+
 	void OnTimer();
+
 	float LoopTime;
 
 private:
@@ -31,5 +34,5 @@ private:
 	bool bTestBool;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-	TArray<AActor*> RegisteredSubrooms;
+	TArray<AActor*> RegisteredSubrooms
 };
