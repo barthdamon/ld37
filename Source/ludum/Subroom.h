@@ -2,19 +2,18 @@
 
 #pragma once
 
-#include "Subroom.h"
 #include "Components/SceneComponent.h"
-#include "FaceControl.generated.h"
+#include "Subroom.generated.h"
 
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class LUDUM_API UFaceControl : public USceneComponent
+class LUDUM_API USubroom : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UFaceControl();
+	USubroom();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -22,10 +21,4 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-	bool bTestBool;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-	TArray<USubroom*> RegisteredSubrooms;
 };
