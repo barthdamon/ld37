@@ -21,8 +21,16 @@ void UFaceControl::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	UE_LOG(LogTemp, Log, TEXT("Face Control active"));
+	FTimerHandle TimerHandle;
+	LoopTime = 2;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UFaceControl::OnTimer, LoopTime, true);
 
+
+}
+
+void UFaceControl::OnTimer() 
+{
+	UE_LOG(LogTemp, Log, TEXT("Timer Run"));
 }
 
 
