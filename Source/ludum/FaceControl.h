@@ -6,7 +6,7 @@
 #include "FaceControl.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class LUDUM_API UFaceControl : public USceneComponent
 {
 	GENERATED_BODY()
@@ -21,6 +21,9 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
+	bool bTestBool;
 		
 	
 };
