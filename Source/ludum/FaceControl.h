@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Subroom.h"
+#include "GameFramework/Actor.h"
 #include "Components/SceneComponent.h"
 #include "FaceControl.generated.h"
 
@@ -27,5 +28,5 @@ private:
 	bool bTestBool;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-	TArray<USubroom*> RegisteredSubrooms;
+	TArray<AActor*> RegisteredSubrooms;
 };
