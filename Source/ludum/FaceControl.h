@@ -13,6 +13,7 @@ class LUDUM_API UFaceControl : public USceneComponent
 {
 	GENERATED_BODY()
 
+
 public:	
 	// Sets default values for this component's properties
 	UFaceControl();
@@ -29,10 +30,14 @@ public:
 
 	float LoopTime;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ZZZ")
+	void RotateSubroom(AActor* subroom, int input);
+
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
 	bool bTestBool;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-	TArray<AActor*> RegisteredSubrooms
+		TArray<AActor*> RegisteredSubrooms;
 };
