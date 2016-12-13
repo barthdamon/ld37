@@ -46,15 +46,17 @@ void UFaceControl::RotateSubroomsForInput(int input)
 		FVector location = transform.GetLocation();
 		UE_LOG(LogTemp, Log, TEXT("x: %lf y: %lf z: %lf"), location.X, location.Y, location.Z);
 
-		FRotationTranslationMatrix translation = FRotationTranslationMatrix(inputRotation, location);
+		FRotationAboutPointMatrix translation = FRotationAboutPointMatrix(inputRotation, location);
 
 		FMatrix locationMatrix = FTranslationMatrix(subroomTransform.GetLocation());
 
 		FMatrix finalMatrix = locationMatrix * translation;
+		//FMatrix finalMatrix = translation;
 		UE_LOG(LogTemp, Log, TEXT("Setting final matrix"));
 		FTransform newTransform;
 		newTransform.SetFromMatrix(finalMatrix);
 		// rotation working, end location not
+
 		RegisteredSubrooms[i]->SetActorTransform(newTransform);
 
 		int index = i;
