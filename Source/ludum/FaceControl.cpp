@@ -55,7 +55,6 @@ void UFaceControl::RotateSubroomsForInput(int input)
 		UE_LOG(LogTemp, Log, TEXT("Setting final matrix"));
 		FTransform newTransform;
 		newTransform.SetFromMatrix(finalMatrix);
-		// rotation working, end location not
 
 		RegisteredSubrooms[i]->SetActorTransform(newTransform);
 
