@@ -31,7 +31,7 @@ public:
 	float LoopTime;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ZZZ")
-	void RotateSubroom(AActor* subroom, int input);
+	void LerpSubroom(AActor* subroom, FTransform destination);
 
 
 private:

@@ -56,6 +56,7 @@ void UFaceControl::RotateSubroomsForInput(int input)
 		FTransform newTransform;
 		newTransform.SetFromMatrix(finalMatrix);
 
+		//LerpSubroom(RegisteredSubrooms[i], newTransform);
 		RegisteredSubrooms[i]->SetActorTransform(newTransform);
 
 		int index = i;
@@ -76,7 +77,7 @@ void UFaceControl::RotateSubroomsForInput(int input)
 
 }
 
-void UFaceControl::RotateSubroom_Implementation(AActor* subroom, int input)
+void UFaceControl::LerpSubroom_Implementation(AActor* subroom, FTransform destination)
 {
 	// default implementation outside blueprint
 	// get this gameobject center point
