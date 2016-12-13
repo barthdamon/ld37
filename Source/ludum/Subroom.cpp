@@ -24,6 +24,15 @@ void USubroom::BeginPlay()
 	
 }
 
+void USubroom::RespondToParent(FTransform parent) 
+{
+	// set transform relative to parents rotation...
+	FTransform transform = GetComponentTransform();
+	FTransform newTransform = transform * parent;
+	//GetComponentTransform(newTransform);
+	SetRelativeTransform(newTransform);
+}
+
 
 // Called every frame
 void USubroom::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )

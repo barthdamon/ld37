@@ -26,18 +26,26 @@ public:
 
 	void RotateSubroomsForInput(int input);
 
+	void RotateFaceForInput(int input);
+
 	void OnTimer();
 
 	float LoopTime;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ZZZ")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Subroom")
 	void LerpSubroom(AActor* subroom, FTransform destination);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Face")
+	void LerpFace(FTransform destination);
 
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
 	bool bTestBool;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
+	FTransform Destination;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
-		TArray<AActor*> RegisteredSubrooms;
+	TArray<AActor*> RegisteredSubrooms;
 };

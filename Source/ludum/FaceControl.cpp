@@ -24,8 +24,18 @@ void UFaceControl::BeginPlay()
 	FTimerHandle TimerHandle;
 	LoopTime = 2;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UFaceControl::OnTimer, LoopTime, true);
+	Destination = GetComponentTransform();
 
+}
 
+void UFaceControl::RotateFaceForInput(int input) {
+	//UE_LOG(LogTemp, Log, TEXT("Rotating face for input"));
+	FTransform transform = GetComponentTransform();
+	FQuat currentRotation = transform.GetRotation();
+	FQuat inputRotation = FQuat::MakeFromEuler(FVector(90, 0, 00));
+	transform.SetRotation(currentRotation * inputRotation);
+	Destination = transform;
+	RotateSubroomsForInput(input);
 }
 
 void UFaceControl::RotateSubroomsForInput(int input) 
@@ -34,30 +44,33 @@ void UFaceControl::RotateSubroomsForInput(int input)
 	TArray<AActor*> newPositions;
 	newPositions.SetNum(RegisteredSubrooms.Num());
 
-	FRotator inputRotation = FRotator(0, 0, input * 90);
+//	FRotator inputRotation = FRotator(0, 0, input * 90);
 
 	// for each subroom in registry
 	for (int i = 0; i < RegisteredSubrooms.Num(); i++) 
 	{
-		//rotate cube around face's transform
 		FTransform transform = GetComponentTransform();
-		FTransform subroomTransform = RegisteredSubrooms[i]->GetTransform();
+		USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
+		subroom->RespondToParent(transform);
 
-		FVector location = transform.GetLocation();
-		UE_LOG(LogTemp, Log, TEXT("x: %lf y: %lf z: %lf"), location.X, location.Y, location.Z);
+		//rotate cube around face's transform
+		//FTransform subroomTransform = RegisteredSubrooms[i]->GetTransform();
 
-		FRotationAboutPointMatrix translation = FRotationAboutPointMatrix(inputRotation, location);
+		//FVector location = transform.GetLocation();
+		//UE_LOG(LogTemp, Log, TEXT("x: %lf y: %lf z: %lf"), location.X, location.Y, location.Z);
 
-		FMatrix locationMatrix = FTranslationMatrix(subroomTransform.GetLocation());
+		//FRotationAboutPointMatrix translation = FRotationAboutPointMatrix(inputRotation, location);
 
-		FMatrix finalMatrix = locationMatrix * translation;
-		//FMatrix finalMatrix = translation;
-		UE_LOG(LogTemp, Log, TEXT("Setting final matrix"));
-		FTransform newTransform;
-		newTransform.SetFromMatrix(finalMatrix);
+		//FMatrix locationMatrix = FTranslationMatrix(subroomTransform.GetLocation());
+
+		//FMatrix finalMatrix = locationMatrix * translation;
+		////FMatrix finalMatrix = translation;
+		//UE_LOG(LogTemp, Log, TEXT("Setting final matrix"));
+		//FTransform newTransform;
+		//newTransform.SetFromMatrix(finalMatrix);
 
 		//LerpSubroom(RegisteredSubrooms[i], newTransform);
-		RegisteredSubrooms[i]->SetActorTransform(newTransform);
+		//RegisteredSubrooms[i]->SetActorTransform(newTransform);
 
 		int index = i;
 		index += input;
@@ -84,10 +97,17 @@ void UFaceControl::LerpSubroom_Implementation(AActor* subroom, FTransform destin
 	// rotate subroom around center point by 90 degrees * input
 }
 
+void UFaceControl::LerpFace_Implementation(FTransform destination)
+{
+	// default implementation outside blueprint
+	// rotate the face so other objects can subscribe
+}
+
 void UFaceControl::OnTimer() 
 {
 	UE_LOG(LogTemp, Log, TEXT("Timer Run"));
-	RotateSubroomsForInput(1);
+	//RotateSubroomsForInput(1);
+	RotateFaceForInput(1);
 }
 
 

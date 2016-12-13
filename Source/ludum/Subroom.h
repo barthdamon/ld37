@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "GameFramework/Actor.h"
 #include "Components/SceneComponent.h"
 #include "Subroom.generated.h"
 
@@ -21,4 +22,6 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+	//UFUNCTION(BlueprintCallable, Category = "SubroomControl")
+	void RespondToParent(FTransform parent);
 };
