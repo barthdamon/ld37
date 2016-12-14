@@ -49,9 +49,9 @@ void UFaceControl::RotateSubroomsForInput(int input)
 	// for each subroom in registry
 	for (int i = 0; i < RegisteredSubrooms.Num(); i++) 
 	{
-		//FTransform transform = GetComponentTransform();
-		//USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
-		//subroom->RespondToParent(transform);
+		FTransform transform = GetComponentTransform();
+		USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
+		subroom->RespondToParent(transform);
 
 		//rotate cube around face's transform
 		//FTransform subroomTransform = RegisteredSubrooms[i]->GetTransform();
@@ -115,12 +115,7 @@ void UFaceControl::OnTimer()
 void UFaceControl::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	for (int i = 0; i < RegisteredSubrooms.Num(); i++)
-	{
-		FTransform transform = GetComponentTransform();
-		USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
-		subroom->RespondToParent(transform);
-	}
+
 	// ...
 }
 

@@ -30,8 +30,7 @@ void USubroom::RespondToParent(FTransform parent)
 	FTransform transform = GetComponentTransform();
 	FTransform newTransform = transform * parent;
 	//GetComponentTransform(newTransform);
-	GetAttachParent()->SetWorldTransform(newTransform);
-	//SetWorldTransform(newTransform);
+	SetRelativeTransform(newTransform);
 }
 
 
