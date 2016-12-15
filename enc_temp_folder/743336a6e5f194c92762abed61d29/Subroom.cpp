@@ -73,9 +73,9 @@ void USubroom::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 
 	if (Parent != NULL)
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Setting relative transform........."));
+		UE_LOG(LogTemp, Log, TEXT("Setting relative transform........."));
 		FTransform parentTransform = Parent->GetComponentTransform();
-		//UE_LOG(LogTemp, Log, TEXT("x: %lf "), parentTransform.GetRotation().X);
+		UE_LOG(LogTemp, Log, TEXT("x: %lf "), parentTransform.GetRotation().X);
 		// find desired position in world space given parent transform....
 		FTransform desiredRelativeTransform = LocalTransform * parentTransform;
 		GetAttachParent()->SetWorldTransform(desiredRelativeTransform);
