@@ -24,13 +24,15 @@ void USubroom::BeginPlay()
 	
 }
 
-void USubroom::SetLocalTransform(AActor* parent) 
+void USubroom::SetLocalTransform(USceneComponent* parent) 
 {
+	UE_LOG(LogTemp, Log, TEXT("Trying to set local transform"));
 	if (parent != NULL) {
 		// set local position relative to parents transform
+		UE_LOG(LogTemp, Log, TEXT("local transform set"));
 		Parent = parent;
 		FTransform transform = GetAttachParent()->GetComponentTransform();
-		LocalTransform = transform.GetRelativeTransform(Parent->GetTransform());
+		LocalTransform = transform.GetRelativeTransform(Parent->GetComponentTransform());
 	}
 }
 
@@ -71,9 +73,11 @@ void USubroom::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 
 	if (Parent != NULL)
 	{
-		FTransform parentTransform = Parent->GetTransform();
+		UE_LOG(LogTemp, Log, TEXT("Setting relative transform........."));
+		FTransform parentTransform = Parent->GetComponentTransform();
+		UE_LOG(LogTemp, Log, TEXT("x: %lf "), parentTransform.GetRotation().X);
 		// find desired position in world space given parent transform....
-		FTransform desiredRelativeTransform = parentTransform * LocalTransform;
+		FTransform desiredRelativeTransform = LocalTransform * parentTransform;
 		GetAttachParent()->SetWorldTransform(desiredRelativeTransform);
 	}
 }
