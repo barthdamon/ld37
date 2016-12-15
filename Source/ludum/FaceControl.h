@@ -48,4 +48,6 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FaceControl", meta = (AllowPrivateAccess = "true"))
 	TArray<AActor*> RegisteredSubrooms;
+
+	void SetSubroomsParent();
 };

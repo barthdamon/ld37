@@ -26,6 +26,17 @@ void UFaceControl::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UFaceControl::OnTimer, LoopTime, true);
 	Destination = GetComponentTransform();
 
+	SetSubroomsParent();
+
+
+}
+
+void UFaceControl::SetSubroomsParent()
+{
+	for (int i = 0; i < RegisteredSubrooms.Num(); i++)
+	{
+		RegisteredSubrooms[i]->FindComponentByClass<USubroom>()->SetLocalTransform(Cast<AActor>(this));
+	}
 }
 
 void UFaceControl::RotateFaceForInput(int input) {
@@ -114,13 +125,14 @@ void UFaceControl::OnTimer()
 // Called every frame
 void UFaceControl::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	for (int i = 0; i < RegisteredSubrooms.Num(); i++)
-	{
-		FTransform transform = GetComponentTransform();
-		USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
-		subroom->RespondToParent(transform);
-	}
+	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	//for (int i = 0; i < RegisteredSubrooms.Num(); i++)
+	//{
+	//	// get where the component was relative to this object... then every tick apply the new coordinate space to it. Apply the change in this objects coordinate space to the object basically...
+	//	FTransform transform = GetComponentTransform();
+	//	USubroom* subroom = RegisteredSubrooms[i]->FindComponentByClass<USubroom>();
+	//	subroom->RespondToParent(transform);
+	//}
 	// ...
 }
 

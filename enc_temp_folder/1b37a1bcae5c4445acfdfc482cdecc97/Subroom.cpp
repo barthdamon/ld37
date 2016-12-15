@@ -69,12 +69,9 @@ void USubroom::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-	if (Parent != NULL)
-	{
-		FTransform parentTransform = Parent->GetTransform();
-		// find desired position in world space given parent transform....
-		FTransform desiredRelativeTransform = parentTransform * LocalTransform;
-		GetAttachParent()->SetWorldTransform(desiredRelativeTransform);
-	}
+	FTransform parentTransform = Parent->GetTransform();
+	// find desired position in world space given parent transform....
+	FTransform desiredRelativeTransform = parentTransform * LocalTransform;
+	GetAttachParent()->SetWorldTransform(desiredRelativeTransform);
 }
 
